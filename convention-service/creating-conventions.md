@@ -12,7 +12,7 @@ The [Convention Service](about.md) is a key component of the supply chain
 compositions the choreographer calls into action.
 The Convention Service enables people in operational roles to efficiently apply
 their operational expertises They can specify the runtime best practices and policies
-(or conventions) of their organization to workloads as they created them on the platform.
+(or conventions) of their organization to workloads as they create them on the platform.
 The power of this component becomes evident when the conventions of an organization
 are applied consistently, at scale, and without hindering the velocity of app developers.
 
