@@ -610,7 +610,7 @@ contour:
 
 ## <a id='access-tap-gui'></a> Access the Tanzu Application Platform GUI
 
-To access Tanzu Application Platform GUI, you'll be able to use the hostname that is pointed at the shared ingress you configure above. If you'd prefer a LoadBalancer for Tanzu Application Platform GUI then you can see how to configure that in the [Accessing Tanzu Application Platform GUI](tap-gui/accessing-tap-gui.md) section.
+To access Tanzu Application Platform GUI, you'll be able to use the hostname that is pointed at the shared ingress you configure above. If you'd prefer a LoadBalancer for Tanzu Application Platform GUI, then you can see how to configure that in the [Accessing Tanzu Application Platform GUI](tap-gui/accessing-tap-gui.md) section.
 
 
 You're now ready to start using Tanzu Application Platform GUI.
@@ -637,6 +637,6 @@ To exclude packages from a Tanzu Application Platform profile:
       - service-bindings.lab.vmware.com
     ```
 
->**Note:** If you decide to exclude a package after performing a profile installation which included that package, you cannot see the the accurate package states immediately after running `tap package installed list -n tap-install`.
+>**Note:** If you decide to exclude a package after performing a profile installation which includes that package, you cannot see the the accurate package states immediately after running `tap package installed list -n tap-install`.
 
 >**Note:** You can break package dependencies by removing a package. Allow 20 minutes to verify that all packages have reconciled correctly while troubleshooting.
