@@ -9,7 +9,7 @@ Welcome to the Tanzu Application Platform. This document guides you through gett
 * Add testing and security scanning to an application
 * Administer, set up, and manage supply chains
 
-Before getting started, you will need to complete the prerequisites in the next section.
+Before getting started, you need to complete the prerequisites in the next section.
 
 
 ## Installation prerequisites
