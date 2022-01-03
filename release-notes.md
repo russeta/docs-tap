@@ -13,7 +13,7 @@ This topic contains release notes for Tanzu Application Platform v1.0.
 The following components have been updated in Tanzu Application Platform v1.0:
 
 - Supply Chain Security Tools
-    - **Sign v1.0.0-beta.3:** For more information, see the [Supply Chain Security Tools - Sign release notes](scst-sign/release-notes.md).
+    - **Sign v1.0.0-beta.4:** For more information, see the [Supply Chain Security Tools - Sign release notes](scst-sign/release-notes.md).
 
 ### Known issues
 
@@ -21,9 +21,11 @@ This release has the following issues:
 
 - **Convention Service:** Convention Service does not currently support self-signed certificates for integrating with a private registry. Support for self-signed certificates is planned for an upcoming release.
 
-- **Installing Tanzu Application Platform on Google Kubernetes Engine (GKE):** When installing Tanzu Application Platform on GKE, Kubernetes control plane may be unavailable for several minutes during the install. Package installs can enter the ReconcileFailed state. When API server becomes available, packages try to reconcile to completion. This can happen on newly provisioned clusters which have not gone through GKE API server autoscaling. When GKE scales up an API server, the current Tanzu Application install continues, and any subsequent installs succeed without interruption.
+- **Installing Tanzu Application Platform on Google Kubernetes Engine (GKE):** When installing Tanzu Application Platform on GKE, Kubernetes control plane can be unavailable for several minutes during the installation. Package installs can enter the `ReconcileFailed` state. When API server becomes available, packages try to reconcile to completion. This can happen on newly provisioned clusters which have not finished GKE API server autoscaling. When GKE scales up an API server, the current Tanzu Application install continues, and any subsequent installs succeed without interruption.
 
-- **Supply Chain Security Tools - Sign:** If all webhook nodes or Pods are evicted by the cluster or scaled down, the admission policy blocks any Pods from being created in the cluster. To resolve the issue, delete the MutatingWebhookConfiguration and reapply it when the cluster is stable. For more information, see Supply Chain Security Tools - Sign known issues.
+- **Supply Chain Choreographer:** Deployment from a public Git repository might require a Git SSH secret. Workaround is to configure SSH access for the public Git repository.
+
+- **Supply Chain Security Tools - Sign:** If all webhook nodes or Pods are evicted by the cluster or scaled down, the admission policy blocks any Pods from being created in the cluster. To resolve the issue, delete the MutatingWebhookConfiguration and reapply it when the cluster is stable. For more information, see [Supply Chain Security Tools - Sign known issues](scst-sign/known_issues.md).
 
 ### Security issues
 
@@ -36,7 +38,7 @@ This release has the following security issues:
 
 ### Component release notes
 
-The following components have separate release notes. 
+The following components have separate release notes.
 
 | Component                                | Release notes                                                |
 | ---------------------------------------- | ------------------------------------------------------------ |
@@ -47,11 +49,12 @@ The following components have separate release notes.
 | Supply Chain Security Tools - Sign       | [Release notes](scst-sign/release-notes.md)                  |
 | Supply Chain Security Tools - Store      | [Release notes](scst-store/release_notes.md)                 |
 | VMware Tanzu Build Service               | [Release notes](https://docs.vmware.com/en/Tanzu-Build-Service/1.3/vmware-tanzu-build-service-v13/GUID-release-notes.html) |
+| VMware Tanzu Developer Tools for Visual Studio Code | [Release notes](vscode-extension/release-notes.md) |
 
 
 ## <a id='0-4-0'></a> v0.4.0 beta release
 
-**Release Date**: December 10, 2021
+**Release Date**: December 13, 2021
 
 ### Features
 
