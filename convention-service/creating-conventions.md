@@ -5,16 +5,16 @@ This document describes how to create and deploy custom conventions to the Tanzu
 
 Tanzu Application Platform makes it easy for developers to transform their code
 into containerized workloads with a URL.
-This transformation is managed by the Supply Chain Choreographer for Tanzu.
+The Supply Chain Choreographer manages this transformation for Tanzu.
 For more information, see [Supply Chain Choreographer](../scc/about.html).
 
 The [Convention Service](about.md) is a key component of the supply chain
 compositions the choreographer calls into action.
 The Convention Service enables people in operational roles to efficiently apply
-their operational expertises They can specify the runtime best practices and policies
-(or conventions) of their organization to workloads as they create them on the platform.
-The power of this component becomes evident when the conventions of an organization
-are applied consistently, at scale, and without hindering the velocity of app developers.
+their operational expertise. They can specify the runtime best practices and policies
+(or conventions) of their organizations to workloads as they create them on the platform.
+The power of this component becomes evident when people in operational roles apply the conventions of an organization 
+consistently, at scale, and without hindering the velocity of app developers.
 
 Opinions and policies vary from organization to organization. The Convention
 Service supports the creation of custom conventions to meet the unique operational needs
@@ -42,8 +42,8 @@ in the PodIntent. The convention server also updates the `status` section of the
 with the name of the convention that's been applied.
 So if needed, you can figure out which conventions have been applied to the workload after the fact.
 
-To provide flexibility in how conventions are organized, multiple convention servers
-can be deployed. Each server can contain a convention or set of conventions focused on a
+To provide flexibility in how conventions are organized, you can deploy multiple convention servers.
+Each server can contain a convention or set of conventions focused on a
 specific class of runtime modifications, on a specific language framework, and so on. How
 the conventions are organized/grouped and deployed is up to the author and the needs of
 their organization.
@@ -144,9 +144,9 @@ For example, adding a prometheus sidecar to web apps, or adding a `workload-type
     Where:
 
     + `PORT` is a possible environment variable, for this example defined in the [`Deployment`](#install-deployment) 
-    + `ServerHandler` is the *handler* function that will be called when any request comes to the server.
+    + `ServerHandler` is the *handler* function that will be called when any request comes to the server
     + `NewConventionServer` is the function in charge of configure and create the *http webhook* server
-    + `port` is the calculated port of the server to listen requests, it needs to match the [`Deployment`](#install-deployment) if the `PORT` variable is not defined in it
+    + `port` is the calculated port of the server to listen requests; it needs to match the [`Deployment`](#install-deployment) if the `PORT` variable is not defined in it
     + The `path` or pattern (default to `/`) is the convention server's default path if it is changed the it needs to be changed in the [`ClusterPodConvention`](#install-convention)
 
 **Note:** The *Server Handler* (`func ConventionHandler(...)`) and the configure/start web server (`func NewConventionServer(...)`) are defined in the convention controller within the `webhook` package but a custom one can be used.
@@ -189,7 +189,7 @@ For example, adding a prometheus sidecar to web apps, or adding a `workload-type
     ...
     ```
 
-4. Configure and start the web server by defining the `NewConventionServer` function which will start the server with the defined port and current context. The server will use the `.crt` and `.key` files to handle *TLS* traffic.
+4. Configure and start the web server by defining the `NewConventionServer` function, which will start the server with the defined port and current context. The server will use the `.crt` and `.key` files to handle *TLS* traffic.
 
     ```go
     package webhook
@@ -331,13 +331,13 @@ When using environment variables to define whether the convention is applicable 
 
 ### <a id='ImageMetadata'></a>Matching Criteria By Image Metadata
 
-For each image contained within the PodTemplateSpec, the convention controller will fetch the OCI image metadata and known [`bill of materials (BOMs)`](reference/bom.md) providing it to the convention server as [`ImageConfig`](./reference/image-config.md). This metadata can be introspected to make decisions about how to configure the PodTemplateSpec.
+For each image contained within the PodTemplateSpec, the convention controller fetchES the OCI image metadata and known [`bill of materials (BOMs)`](reference/bom.md) providing it to the convention server as [`ImageConfig`](./reference/image-config.md). You can introspect this metadata to make decisions about how to configure the PodTemplateSpec.
 
 ## <a id='install'></a> Configure and Install the Convention Server
 
-The `server.yaml` defines the Kubernetes components that will enable the convention server in the cluster, the next definitions are within the file.
+The `server.yaml` defines the Kubernetes components that enables the convention server in the cluster; the next definitions are within the file.
 
-1. <a id='install-namespace'></a>A `namespace` will be created for the convention server components and will have the required objects to run the server. It is used in the [`ClusterPodConvention`](#install-convention) section to indicates the controller where the server is.
+1. <a id='install-namespace'></a>A `namespace` is created for the convention server components and will have the required objects to run the server. It is used in the [`ClusterPodConvention`](#install-convention) section to indicates the controller where the server is.
     
     ```yaml
     ...
@@ -350,7 +350,7 @@ The `server.yaml` defines the Kubernetes components that will enable the convent
     ...
     ```
     
-2. <a id='install-cm'></a>A cert manager [`Issuer`](https://cert-manager.io/docs/concepts/issuer/), will be created to issue the cert needed for TLS communication. (Optional)
+2. <a id='install-cm'></a>A cert manager [`Issuer`](https://cert-manager.io/docs/concepts/issuer/), is created to issue the cert needed for TLS communication. (Optional)
 
     ```yaml
     ...
@@ -368,7 +368,7 @@ The `server.yaml` defines the Kubernetes components that will enable the convent
     ...
     ```
 
-3. <a id='install-cert'></a>A self-signed [`Certificate`](https://cert-manager.io/docs/concepts/certificate/) will be created. (Optional)
+3. <a id='install-cert'></a>A self-signed [`Certificate`](https://cert-manager.io/docs/concepts/certificate/) is created. (Optional)
 
     ```yaml
     ...
@@ -397,7 +397,7 @@ The `server.yaml` defines the Kubernetes components that will enable the convent
     ...
     ```
 
-4. <a id='install-deployment'></a>A Kubernetes `Deployment` will be created for the webhook to run from. The container port defined by the `Deployment` will be used by the [`Service`](#install-service) to expose server.
+4. <a id='install-deployment'></a>A Kubernetes `Deployment` is created for the webhook to run from. The [`Service`](#install-service) to expose server uses the container port defined by by the `Deployment`.
 
     ```yaml
     ...
@@ -451,7 +451,7 @@ The `server.yaml` defines the Kubernetes components that will enable the convent
     ...
     ```
 
-5.  <a id='install-service'></a>A Kubernetes `Service` to expose the convention deployment will also be created. For this example the exposed port is the default `443` but if it is changed, the [`ClusterPodConvention`](#install-convention) needs to be updated with the proper one. 
+5.  <a id='install-service'></a>A Kubernetes `Service` to expose the convention deployment also is created. For this example the exposed port is the default `443`, but, if it is changed, update the [`ClusterPodConvention`](#install-convention) with the proper one. 
 
     ```yaml
     ...
@@ -473,7 +473,7 @@ The `server.yaml` defines the Kubernetes components that will enable the convent
     ---
     ...
     ```
-6. <a id='install-convention'></a>Finally, the [`ClusterPodConvention`](./reference/cluster-pod-convention.md) will add the convention to the cluster to make it available for the Convention Controller
+6. <a id='install-convention'></a>Finally, the [`ClusterPodConvention`](./reference/cluster-pod-convention.md) adds the convention to the cluster to make it available for the Convention Controller
 
     ```yaml
     ...
@@ -494,19 +494,19 @@ The `server.yaml` defines the Kubernetes components that will enable the convent
             # port: 443 # default
     ```
 
-**_Optional_**: Only needed if self-signed certificate is being used. Otherwise, check the cert-manager documentation.
+**_Optional_**: This is needed only if you use a self-signed certificate. Otherwise, check the cert-manager documentation.
 
 ## How to Deploy a Convention Server
 
 1. Build and Install the Convention
 
-    + If the convention needs to be built and deployed, use the [ko](https://github.com/google/ko) tool to do so, it will compile yout _go_ code into a docker image and push it to the registry(`KO_DOCKER_REGISTRY`).
+    + If the convention needs to be built and deployed, use the [ko](https://github.com/google/ko) tool to do so; it compiles yout _go_ code into a docker image and pushes it to the registry(`KO_DOCKER_REGISTRY`).
     
         ```bash
         ko apply -f dist/server.yaml
         ```
 
-    + If a different tool is being used to build the image, the configuration can be also be applied using either `kubectl` or `kapp` setting the correct image in the [`Deployment`](#install-convention) descriptor.
+    + If a different tool is being used to build the image, you can also apply the configuration using either `kubectl` or `kapp` setting the correct image in the [`Deployment`](#install-convention) descriptor.
     
        kubectl
        
@@ -523,7 +523,7 @@ The `server.yaml` defines the Kubernetes components that will enable the convent
 2. Verify the Convention Server
 To check the status of the convention server, check for the running convention pods:
 
-    + If the server is running, `kubectl get all -n awesome-convention` will return something like ...
+    + If the server is running, `kubectl get all -n awesome-convention` returns something like ...
     
         ```text
         NAME                                       READY   STATUS    RESTARTS   AGE
