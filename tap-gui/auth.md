@@ -1,10 +1,6 @@
 ## Setting up a Tanzu Application Platform GUI authentication provider
 
-<<<<<<< Updated upstream
 Tanzu Application Platform GUI extends the current [Backstage's auth plug-in](https://backstage.io/docs/auth/) so that you can see a login page based on the authentication providers configured at install time. This feature is a work in progress, and, at the moment, should support the following authentication providers out-of-the-box:
-=======
-The Tanzu Application Platform GUI extends the current [Backstage's auth plug-in](https://backstage.io/docs/auth/) so that you can see a login page based on the authentication providers configured at install time. This feature is a work in progress, and, at the moment, should support the following auth providers out-of-the-box:
->>>>>>> Stashed changes
 
 - [Auth0](https://backstage.io/docs/auth/auth0/provider)
 - [Azure](https://backstage.io/docs/auth/microsoft/provider)
